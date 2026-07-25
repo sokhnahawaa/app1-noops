@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awa DANG — Ingénieure Full-Stack &amp; DevOps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+
+<style>
+:root{
+  --bg:#ffffff;
+  --bg-soft:#f6f8fc;
+  --ink:#12182b;
+  --ink-muted:#5b6479;
+  --ink-dim:#97a0b4;
+  --blue:#1e4fd8;
+  --blue-deep:#12309e;
+  --blue-soft:#e9effe;
+  --orange:#f4771f;
+  --orange-soft:#fdeada;
+  --line:#e2e7f0;
+  --radius:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+::selection{background:var(--orange-soft);color:var(--blue-deep);}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;color:var(--ink);}
+.mono{font-family:'IBM Plex Mono',monospace;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 28px;position:relative;z-index:1;}
+a{color:inherit;}
+
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 75% 55% at 50% 0%, #000 30%, transparent 85%);
+  opacity:0.55;
+}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;}
+.brand{display:flex;align-items:center;gap:9px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;}
+.brand .mark{
+  width:18px;height:18px;border:1.6px solid var(--blue);position:relative;flex-shrink:0;
+}
+.brand .mark::before, .brand .mark::after{
+  content:'';position:absolute;background:var(--orange);
+}
+.brand .mark::before{width:8px;height:1.6px;top:50%;left:50%;transform:translate(-50%,-50%);}
+.brand .mark::after{width:1.6px;height:8px;top:50%;left:50%;transform:translate(-50%,-50%);}
+.nav-links{display:flex;gap:30px;font-size:14px;}
+.nav-links a{color:var(--ink-muted);text-decoration:none;transition:color .2s;position:relative;}
+.nav-links a:hover, .nav-links a:focus-visible{color:var(--blue);}
+.nav-links a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--orange);transition:width .25s;}
+.nav-links a:hover::after{width:100%;}
+@media (max-width:680px){.nav-links{display:none;}}
+
+/* ---------- HERO ---------- */
+header.hero{
+  min-height:96vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding-top:110px;padding-bottom:60px;
+  position:relative;
+}
+.blueprint-frame{
+  position:relative;border:1px solid var(--line);border-radius:16px;
+  padding:56px 48px;background:var(--bg-soft);
+  max-width:760px;
+}
+.corner{position:absolute;width:22px;height:22px;}
+.corner::before, .corner::after{content:'';position:absolute;background:var(--blue);}
+.corner::before{width:22px;height:2px;}
+.corner::after{width:2px;height:22px;}
+.corner.tl{top:-1px;left:-1px;}
+.corner.tr{top:-1px;right:-1px;}
+.corner.bl{bottom:-1px;left:-1px;}
+.corner.br{bottom:-1px;right:-1px;}
+.corner.tl::before,.corner.tl::after{top:0;left:0;}
+.corner.tr::before{top:0;right:0;} .corner.tr::after{top:0;right:0;}
+.corner.bl::before{bottom:0;left:0;} .corner.bl::after{bottom:0;left:0;}
+.corner.br::before{bottom:0;right:0;} .corner.br::after{bottom:0;right:0;}
+
+.tag-line{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);
+  margin-bottom:22px;
+  opacity:0;animation:riseIn .6s ease forwards;animation-delay:.1s;
+}
+.tag-line .sq{width:6px;height:6px;background:var(--orange);display:inline-block;}
+
+.hero h1{
+  font-size:clamp(36px,5.6vw,58px);font-weight:700;line-height:1.08;margin-bottom:18px;
+  opacity:0;animation:riseIn .7s ease forwards;animation-delay:.22s;
+}
+.hero h1 .accent{color:var(--blue);}
+.hero p.lede{
+  max-width:520px;color:var(--ink-muted);font-size:17px;
+  opacity:0;animation:riseIn .7s ease forwards;animation-delay:.36s;
+}
+.hero .cta-row{
+  display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;
+  opacity:0;animation:riseIn .7s ease forwards;animation-delay:.5s;
+}
+@keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+.btn{
+  font-family:'IBM Plex Mono',monospace;font-size:13px;
+  padding:13px 24px;border-radius:8px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:transform .2s, box-shadow .2s, background .2s, color .2s;
+}
+.btn-primary{background:var(--blue);color:#fff;font-weight:500;}
+.btn-primary:hover{background:var(--blue-deep);transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(30,79,216,0.45);}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);}
+.btn-ghost:hover{border-color:var(--orange);color:var(--orange);transform:translateY(-2px);}
+
+.dim-line{
+  margin-top:46px;padding-top:18px;border-top:1px dashed var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11px;color:var(--ink-dim);letter-spacing:.08em;
+  opacity:0;animation:riseIn .7s ease forwards;animation-delay:.62s;
+}
+
+/* ---------- SECTIONS ---------- */
+section{padding:104px 0;position:relative;}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--blue);
+  text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px;
+  display:flex;align-items:center;gap:9px;
+}
+.eyebrow .sq{width:6px;height:6px;background:var(--orange);display:inline-block;}
+section h2{font-size:clamp(26px,3.2vw,34px);margin-bottom:18px;}
+section > .wrap > p.section-intro{color:var(--ink-muted);max-width:600px;margin-bottom:52px;font-size:16px;}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start;}
+@media (max-width:760px){.about-grid{grid-template-columns:1fr;}}
+.about-grid p{color:var(--ink-muted);margin-bottom:16px;}
+.about-grid strong{color:var(--ink);font-weight:600;}
+.fact-list{list-style:none;border-top:1px solid var(--line);}
+.fact-list li{
+  display:flex;justify-content:space-between;padding:14px 0;
+  border-bottom:1px solid var(--line);font-size:14px;
+}
+.fact-list li span:first-child{color:var(--ink-dim);font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.05em;}
+.fact-list li span:last-child{color:var(--ink);text-align:right;font-weight:500;}
+
+/* SKILLS */
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;}
+.skill-card{
+  background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 22px 20px;transition:border-color .25s, transform .25s, box-shadow .25s;
+}
+.skill-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 14px 30px -18px rgba(18,24,43,0.25);}
+.skill-card h3{font-size:15px;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.skill-card h3 .ico{color:var(--orange);font-family:'IBM Plex Mono',monospace;}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-muted);
+  border:1px solid var(--line);background:#fff;padding:5px 10px;border-radius:6px;
+  transition:color .2s, border-color .2s;
+}
+.tag:hover{color:var(--blue);border-color:var(--blue);}
+
+/* PROJECTS */
+.project{
+  display:grid;grid-template-columns:220px 1fr;gap:32px;
+  padding:34px 0;border-top:1px solid var(--line);
+}
+.project:last-child{border-bottom:1px solid var(--line);}
+@media (max-width:700px){.project{grid-template-columns:1fr;gap:14px;}}
+.project.featured{
+  background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);
+  padding:32px;margin:0 0 20px;border-top:1px solid var(--line);
+}
+.project.featured:last-of-type{margin-bottom:0;}
+.project-meta{display:flex;flex-direction:column;gap:10px;}
+.project-status{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+  display:inline-flex;align-items:center;gap:6px;color:var(--blue-deep);width:fit-content;
+  border:1px solid var(--blue-soft);background:var(--blue-soft);padding:4px 9px;border-radius:5px;
+}
+.project-status.orange{color:#a8500f;border-color:var(--orange-soft);background:var(--orange-soft);}
+.project-status .d{width:6px;height:6px;border-radius:50%;background:currentColor;}
+.project-meta .role{color:var(--ink-dim);font-size:13px;font-family:'IBM Plex Mono',monospace;}
+.project-body h3{font-size:21px;margin-bottom:10px;}
+.project-body p{color:var(--ink-muted);margin-bottom:16px;max-width:600px;}
+.stack-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+.stack-row .tag{font-size:11px;padding:4px 9px;}
+.project-links a{
+  color:var(--blue);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:13px;
+  border-bottom:1px solid var(--blue-soft);padding-bottom:2px;transition:color .2s,border-color .2s;
+}
+.project-links a:hover{color:var(--orange);border-color:var(--orange);}
+.highlight-row{display:flex;gap:22px;flex-wrap:wrap;margin-top:6px;}
+.highlight{font-size:13px;color:var(--ink-muted);}
+.highlight strong{display:block;color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:16px;}
+
+/* OTHER REPOS */
+.repo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+.repo-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;text-decoration:none;color:var(--ink);transition:all .25s;
+  display:block;
+}
+.repo-card:hover{border-color:var(--orange);transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(18,24,43,0.2);}
+.repo-card .rname{font-family:'IBM Plex Mono',monospace;font-size:14px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;}
+.repo-card .rlang{font-size:11px;color:var(--ink-dim);}
+.repo-card .rdesc{font-size:13px;color:var(--ink-muted);}
+
+/* CONTACT */
+.contact-panel{
+  background:var(--blue);color:#fff;border-radius:18px;
+  padding:56px 44px;text-align:center;position:relative;overflow:hidden;
+}
+.contact-panel::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 80% 0%, rgba(244,119,31,0.35), transparent 55%);
+  pointer-events:none;
+}
+.contact-panel .eyebrow{color:#cddcff;justify-content:center;}
+.contact-panel .eyebrow .sq{background:var(--orange);}
+.contact-panel h2{color:#fff;margin-bottom:12px;}
+.contact-panel p{color:#dbe4fb;max-width:440px;margin:0 auto 30px;}
+.contact-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+.contact-panel .btn-primary{background:#fff;color:var(--blue-deep);}
+.contact-panel .btn-primary:hover{background:var(--orange-soft);color:#a8500f;box-shadow:none;}
+
+footer{
+  padding:36px 0 50px;text-align:center;
+  color:var(--ink-dim);font-family:'IBM Plex Mono',monospace;font-size:12px;
+}
+footer .heart{color:var(--orange);}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;}
+  html{scroll-behavior:auto;}
+}
+
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="mark"></span> Awa DANG</div>
+    <div class="nav-links">
+      <a href="#about">à propos</a>
+      <a href="#skills">stack</a>
+      <a href="#projects">projets</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="blueprint-frame">
+      <span class="corner tl"></span><span class="corner tr"></span>
+      <span class="corner bl"></span><span class="corner br"></span>
+
+      <div class="tag-line"><span class="sq"></span> Full-Stack &amp; DevOps Engineer</div>
+      <h1>Awa DANG —<br><span class="accent">je construis des systèmes qui tiennent la route.</span></h1>
+      <p class="lede">Étudiante en Master 2 à l'UCAD de Dakar. Du schéma de base de données au cluster Kubernetes en production, je conçois des plateformes complètes, pas seulement des interfaces.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#projects">Voir les projets</a>
+        <a class="btn btn-ghost" href="https://github.com/sokhnahawaa" target="_blank" rel="noopener">github.com/sokhnahawaa</a>
+      </div>
+      <div class="dim-line mono">
+        <span>UCAD · DAKAR</span>
+        <span>MASTER 2 — 2026</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="sq"></span>à propos</div>
+    <h2 class="reveal">Qui suis je?</h2>
+    <div class="about-grid" style="margin-top:36px;">
+      <div class="reveal">
+        <p>Je suis <strong>Awa DANG</strong>, étudiante en <strong>Master 2</strong> à l'<strong>Université Cheikh Anta Diop de Dakar</strong>, spécialisée en développement full-stack et en ingénierie d'infrastructure.</p>
+        <p>Mon travail mêle développement full-stack et administration système : je construis des plateformes web de bout en bout et je mets en place les briques réseau et infrastructure qui les font tourner de façon fiable — serveurs DNS, clusters Kubernetes, pipelines CI/CD.</p>
+      </div>
+      <ul class="fact-list reveal">
+        <li><span>Adresse</span><span>Dakar, Sénégal</span></li>
+        <li><span>Formation</span><span>Master 2 — UCAD</span></li>
+        <li><span>Focus</span><span>Full-Stack &amp; DevOps</span></li>
+        <li><span>Projets</span><span>Infra · Réseaux · AgriTech · Full-Stack</span></li>
+        <li><span>GitHub</span><span>@sokhnahawaa</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="background:var(--bg-soft);">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="sq"></span>stack</div>
+    <h2 class="reveal">Stack technique</h2>
+    <div class="skill-grid">
+      <div class="skill-card reveal">
+        <h3><span class="ico">&gt;</span> Backend &amp; données</h3>
+        <div class="tag-row">
+          <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Java</span>
+          <span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">Prisma</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h3><span class="ico">&gt;</span> Frontend</h3>
+        <div class="tag-row">
+          <span class="tag">React</span><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">Flutter</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h3><span class="ico">&gt;</span> Infrastructure &amp; DevOps</h3>
+        <div class="tag-row">
+          <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Terraform</span>
+          <span class="tag">Ansible</span><span class="tag">HAProxy</span><span class="tag">Jenkins</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h3><span class="ico">&gt;</span> Réseaux &amp; systèmes</h3>
+        <div class="tag-row">
+          <span class="tag">Linux</span><span class="tag">DNS / BIND9</span><span class="tag">Administration serveur</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h3><span class="ico">&gt;</span> Plateforme &amp; CI/CD</h3>
+        <div class="tag-row">
+          <span class="tag">GitHub Actions</span><span class="tag">GitHub OAuth</span>
+          <span class="tag">SonarCloud</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h3><span class="ico">&gt;</span> Systèmes distribués</h3>
+        <div class="tag-row">
+          <span class="tag">Raft / etcd</span><span class="tag">HA multi-master</span><span class="tag">Load balancing</span>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="sq"></span>projets</div>
+    <h2 class="reveal">Projets phares</h2>
+    <p class="section-intro reveal">Des systèmes conçus et livrés de bout en bout, entre infrastructure, réseau et applications web complètes.</p>
+
+    <div class="project featured reveal">
+      <div class="project-meta">
+        <span class="project-status"><span class="d"></span>Démontré</span>
+        <span class="role">Infrastructure &amp; cloud</span>
+      </div>
+      <div class="project-body">
+        <h3>Déploiement d'un cluster Kubernetes sur serveur Linux</h3>
+        <p>Installation et configuration d'un cluster Kubernetes multi-nœuds sur des serveurs Linux (kubeadm) : mise en réseau des nodes, HAProxy en équilibreur de charge devant les masters, et démonstration du failover d'un master via l'élection de leader basée sur Raft.</p>
+        <div class="stack-row">
+          <span class="tag">Kubernetes</span><span class="tag">kubeadm</span><span class="tag">HAProxy</span>
+          <span class="tag">etcd / Raft</span><span class="tag">Linux</span>
+        </div>
+        <div class="highlight-row">
+          <div class="highlight"><strong>Multi-nœuds</strong>Masters et workers sur serveurs Linux dédiés</div>
+          <div class="highlight"><strong>Failover</strong>Basculement de master validé en conditions réelles</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project featured reveal">
+      <div class="project-meta">
+        <span class="project-status"><span class="d"></span>Réalisé</span>
+        <span class="role">Administration réseau</span>
+      </div>
+      <div class="project-body">
+        <h3>Mise en place d'un serveur DNS</h3>
+        <p>Configuration d'un serveur DNS sur Linux pour la résolution de noms internes : création et gestion de zones, enregistrements A / CNAME / MX, tests de résolution avec dig et nslookup, et sécurisation des transferts de zone entre serveurs primaire et secondaire.</p>
+        <div class="stack-row">
+          <span class="tag">BIND9</span><span class="tag">DNS</span><span class="tag">Linux</span><span class="tag">Réseaux</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project featured reveal">
+      <div class="project-meta">
+        <span class="project-status"><span class="d"></span>Réalisé</span>
+        <span class="role">Projet — e-commerce agricole</span>
+      </div>
+      <div class="project-body">
+        <h3>Plateforme de vente de produits agricoles</h3>
+        <p>Application web permettant à des producteurs de mettre en vente leurs produits agricoles : catalogue avec fiches produits, panier, gestion des commandes et back-office d'administration pour le suivi des ventes.</p>
+        <div class="stack-row">
+          <span class="tag">PHP / Laravel</span><span class="tag">Blade</span><span class="tag">MySQL</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/sokhnahawaa/DangAgroProducts" target="_blank" rel="noopener">Voir le dépôt →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project featured reveal">
+      <div class="project-meta">
+        <span class="project-status"><span class="d"></span>Réalisé</span>
+        <span class="role">Projet — plateforme de réservation</span>
+      </div>
+      <div class="project-body">
+        <h3>Plateforme de location de matériels agricoles</h3>
+        <p>Plateforme mettant en relation producteurs pour la location de matériels agricoles (tracteurs, outils) : calendrier de disponibilité, système de réservation et suivi des locations en cours.</p>
+        <div class="stack-row">
+          <span class="tag">PHP / Laravel</span><span class="tag">MySQL</span><span class="tag">Réservation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project featured reveal">
+      <div class="project-meta">
+        <span class="project-status"><span class="d"></span>Réalisé</span>
+        <span class="role">Projet — application web</span>
+      </div>
+      <div class="project-body">
+        <h3>Application Full Stack (Node.js – React – MongoDB)</h3>
+        <p>Application web complète : API REST en Node.js / Express, interface utilisateur en React, persistance des données avec MongoDB, intégrée à un pipeline Jenkins pour automatiser les tests et le déploiement.</p>
+        <div class="stack-row">
+          <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">React</span>
+          <span class="tag">MongoDB</span><span class="tag">Jenkins</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/sokhnahawaa/fullstack_jenkins" target="_blank" rel="noopener">Voir le dépôt →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-panel reveal">
+      <div class="eyebrow"><span class="sq"></span>contact</div>
+      <h2>Construisons quelque chose de fiable.</h2>
+      <p>Ouverte aux collaborations, stages et échanges autour du DevOps, de l'IA appliquée à l'infrastructure et du full-stack.</p>
+      <div class="contact-btns">
+        <a class="btn btn-primary" href="https://github.com/sokhnahawaa" target="_blank" rel="noopener">Voir mon GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    @AwaDANG <span class="heart">2026</span> 
+  </div>
+</footer>
+
+<script>
+  // ---- Scroll reveal ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold:0.15 });
+  revealEls.forEach(el=>io.observe(el));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
